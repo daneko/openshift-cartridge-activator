@@ -6,7 +6,7 @@ function start {
     [ -d target ] || build
     rm -f target/universal/stage/RUNNING_PID
     BIN_NAME=$(ls target/universal/stage/bin/ | head -n 1)
-    nohup target/universal/stage/bin/$BIN_NAME -Duser.home=${OPENSHIFT_DATA_DIR} -Dhttp.port=8080 -Dhttp.address=${OPENSHIFT_PLAY2_IP} -DapplyEvolutions.default=true -Dconfig.resource=openshift.conf -mem 512 > $OPENSHIFT_PLAY2_LOG_DIR/play.log 2>&1 &
+    nohup target/universal/stage/bin/$BIN_NAME -Duser.home=${OPENSHIFT_DATA_DIR} -Dhttp.port=8080 -Dhttp.address=${OPENSHIFT_PLAY2_IP} -DapplyEvolutions.default=true -Dconfig.resource=openshift.conf -J-Xmx512m > $OPENSHIFT_PLAY2_LOG_DIR/play.log 2>&1 &
 }
 
 function stop {
