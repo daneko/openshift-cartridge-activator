@@ -3,10 +3,12 @@
 function start {
     cd $OPENSHIFT_REPO_DIR
     # build on first time
-    [ -d target ] || build
-    rm -f target/universal/stage/RUNNING_PID
     BIN_NAME=$(ls target/universal/stage/bin/ | head -n 1)
-    nohup target/universal/stage/bin/$BIN_NAME -Duser.home=${OPENSHIFT_DATA_DIR} -Dhttp.port=8080 -Dhttp.interface=${OPENSHIFT_PLAY2_IP} -DapplyEvolutions.default=true -Dconfig.resource=openshift.conf -J-Xmx512m > $OPENSHIFT_PLAY2_LOG_DIR/play.log 2>&1 &
+    if [ -f $BIN_NAME ] ; then
+      nohup run_application &
+    else
+      nohup sh `__build; run_application` &
+    fi
 }
 
 function stop {
@@ -26,8 +28,23 @@ function build {
     unset GIT_DIR
     unset GIT_WORK_TREE
 
-    cd ${OPENSHIFT_REPO_DIR}
-    activator clean stage -Duser.home=${OPENSHIFT_DATA_DIR} -mem 512
+    cd $OPENSHIFT_REPO_DIR
+    nohup __build &
+}
+
+function run_application {
+    rm -f target/universal/stage/RUNNING_PID
+    BIN_NAME=$(ls target/universal/stage/bin/ | head -n 1)
+    if [ -f $BIN_NAME ] ; then
+        target/universal/stage/bin/$BIN_NAME -Duser.home=${OPENSHIFT_DATA_DIR} -Dhttp.port=8080 -J-Xmx512m > $OPENSHIFT_LOG_DIR/${BIN_NAME}.log 2>&1
+    else
+        echo "not found ${BIN_NAME}"
+    fi
+}
+
+function __build {
+    activator clean
+    activator stage -Duser.home=${OPENSHIFT_DATA_DIR} -J-Xmx512m
 }
 
 function tidy {

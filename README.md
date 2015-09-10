@@ -1,16 +1,11 @@
-[![logo](http://www.playframework.com/assets/images/logos/normal-mini.png)](http://www.playframework.com/)
+# OpenShift sbt-native-package Cartridge
 
-# OpenShift Play Framework Cartridge
-
-Works with Play 2.3 and Activator : http://www.playframework.com/
+Works with any sbt-native-package module maybe...
 
 ## Use it
 
 Note : now works with small OpenShift gears, the build script will use no more than 512MB by default.
 
-### Tutorial
-
-Have a look at http://misto.ch/play-on-openshift/ ; at the moment you need to use ```http://cartreflect-claytondev.rhcloud.com/reflect?github=tyrcho/openshift-cartridge-play2&commit=play-2.3.0``` since the master is not stable yet.
 
 ### From the web site
 
@@ -29,3 +24,7 @@ You might need to increase the timeout to let it the time to download the activa
 You need to have installed [Play](http://www.playframework.com/) on your development workstation.
 
 Simply launch ```activator run``` from your invite, and browse to http://localhost:9000/ to see the welcome page.
+
+### memo
+
+https://docs.openshift.org/origin-m4/oo_cartridge_developers_guide.html#system-provided-variables-read-only

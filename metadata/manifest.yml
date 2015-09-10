@@ -1,39 +1,28 @@
-Name: play2
-Cartridge-Short-Name: Play2
-Display-Name: Play Framework 2.3.5
-Description: "The High Velocity Web Framework For Java and Scala"
-Version: '2.3.5'
+Name: activator-with-sbt-native-package
+Cartridge-Short-Name: scala-web
+Display Name: activator with sbt native package
+Description: "activator with sbt native package"
+Version: '0.0.1'
 License: "MIT"
 Vendor: none
-Cartridge-Version: '2.3.5'
+Cartridge-Version: '0.0.1'
 Cartridge-Vendor: github
 Categories:
   - service
-  - play
   - scala
   - web_framework
   - activator
 Provides:
-  - play2
   - activator
 Scaling:
   Min: 1
   Max: -1
 Cart-Data:
-  - Key: OPENSHIFT_PLAY2_LOG_DIR
-    Type: environment
-    Description: "Directory to store application log files."
   - Key: OPENSHIFT_TMP_DIR
     Type: environment
     Description: "Directory to store application temporary files."
   - Key: OPENSHIFT_REPO_DIR
     Type: environment
-  - Key: OPENSHIFT_PLAY2_PORT
-    Type: environment
-    Description: "Internal port to which the web-framework binds to."
-  - Key: OPENSHIFT_PLAY2_IP
-    Type: environment
-    Description: "Internal IP to which the web-framework binds to."
   - Key: OPENSHIFT_APP_DNS
     Type: environment
     Description: "Fully qualified domain name for the application."
@@ -51,7 +40,6 @@ Cart-Data:
     Description: "Unique ID which identified the gear. This value changes between gears."
 Group-Overrides:
   - components:
-    - play2
     - activator
     - web_proxy
 Publishes:
